@@ -30,6 +30,11 @@ jobs:
         run: npm install
         working-directory: ./server
 
+      # Step 4.5: Grant execute permissions to mocha in the "server" folder
+      - name: Grant execute permissions to mocha
+        run: chmod +x ./node_modules/.bin/mocha
+        working-directory: ./server
+
       # Step 5: Run tests for the frontend (if you have tests set up in Jest)
       - name: Run tests for frontend
         run: npm test
