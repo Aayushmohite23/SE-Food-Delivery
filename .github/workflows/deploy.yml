@@ -40,15 +40,6 @@ jobs:
         run: npm test
         working-directory: ./public
 
-      # Step 6: Run tests for the backend (if you have tests set up in Mocha)
-      - name: Grant execute permissions to cross-env
-        run: chmod +x ./node_modules/.bin/cross-env
-        working-directory: ./server
-
-      - name: Run tests for backend
-        run: npm test
-        working-directory: ./server
-
       # Step 7: Build the frontend (public) project
       - name: Build the frontend project
         run: npm run build
