@@ -41,6 +41,10 @@ jobs:
         working-directory: ./server
 
       # Step 7: Build the frontend (public) project
+      - name: Grant execute permissions to cross-env
+        run: chmod +x ./node_modules/.bin/cross-env
+        working-directory: ./server
+
       - name: Build the frontend project
         run: npm run build
         working-directory: ./public
