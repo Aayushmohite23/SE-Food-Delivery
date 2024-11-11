@@ -24,13 +24,13 @@ const toastOptions =
 function HomePage()
 {
     const navigate = useNavigate();
-    const [itemsList, setItemsList] = useState([]); // Cart items with quantities
+    const [food_items, setFood_items] = useState([]); // Cart items with quantities
     const [menu, setMenu] = useState([]); // Food menu items
     const [selectedCuisine, setSelectedCuisine] = useState('');
     // axios.defaults.withCredentials = true;
 
     useEffect(() => {
-        const fetchMenu = async () => {
+        const displayMenu = async () => {
             try
             {
                 // console.log(images);
@@ -46,7 +46,7 @@ function HomePage()
                 toast.error("Failed to load menu", toastOptions);
             }
         };
-        fetchMenu();
+        displayMenu();
 
         initializeList();
     }, [navigate]);
@@ -64,7 +64,7 @@ function HomePage()
                 const arr = [];
                 cart.forEach(cartItem => arr.push(cartItem));
 
-                setItemsList(arr);
+                setFood_items(arr);
             }
             else
             {
@@ -82,7 +82,7 @@ function HomePage()
     {
         try
         {            
-            const item = itemsList.find(item => item._id === _id);
+            const item = food_items.find(item => item._id === _id);
             const quantity = item ? item.quantity : 0;
             
             const {data} = await axios.patch(`${increaseCartItem}/${_id}`, {quantity: quantity});
@@ -106,7 +106,7 @@ function HomePage()
     {
         try
         {
-            const item = itemsList.find(item => item._id === _id);
+            const item = food_items.find(item => item._id === _id);
             const quantity = item ? item.quantity : 0;
 
             const {data} = await axios.patch(`${decreaseCartItem}/${_id}`, {quantity: quantity});
@@ -125,7 +125,7 @@ function HomePage()
         }
     }
 
-    const fetchCuisineItems = async (cuisine) => {
+    const filter_by_cuisine = async (cuisine) => {
         if(selectedCuisine === cuisine) cuisine = '';
         const {data} = await axios(`${getMenu}?cuisine=${cuisine}`);
         if(data.status)
@@ -140,7 +140,7 @@ function HomePage()
     function displayCuisine()
     {
         return menu_list.map((cuisine) => (
-            <div data-testid={`cuisine-${cuisine.menu_name}`} className='cuisine-div' key={cuisine.menu_name} onClick={() => fetchCuisineItems(cuisine.menu_name)}>
+            <div data-testid={`cuisine-${cuisine.menu_name}`} className='cuisine-div' key={cuisine.menu_name} onClick={() => filter_by_cuisine(cuisine.menu_name)}>
                 <img className={`${selectedCuisine === cuisine.menu_name ? "selected" : ""}`} src={cuisine.menu_image} alt={cuisine.menu_name} />
                 <p>{cuisine.menu_name}</p>
             </div>
@@ -150,7 +150,7 @@ function HomePage()
     // Display food menu with Add/Increase/Decrease buttons
     const menuContainer = menu.map((item) => {
         const {_id} = item;
-        const cartItem = itemsList.find(i => i._id === _id);
+        const cartItem = food_items.find(i => i._id === _id);
 
         return (
             <StyledCard key={_id} data-testid={`menu-item-${item._id}`}>
@@ -177,7 +177,7 @@ function HomePage()
         <>
             <Container>
                 <Navbar/>
-                {itemsList && (
+                {food_items && (
                     <>
                         <div className='top-content'>
                             <img src={BackgroundFood} alt="food-item" />
@@ -196,7 +196,7 @@ function HomePage()
                                 <button>View Menu</button>
                             </AnchorLink>
                         </div>
-                        <p style={{marginTop: "2rem", fontSize: "1.5rem", fontWeight: "bold"}}>Explore Our Menu</p>
+                        <p style={{marginTop: "2rem", fontSize: "1.5rem", fontWeight: "bold"}}>Explore Our Delicious and tasty Menu</p>
                         <p style={{marginTop: "1rem"}}>Choose from a diverse menu featuring a delectable array of dishes.</p>
                         <div className='cuisine-nav'>{displayCuisine()}</div>
                         {/* <hr style={{marginTop: "3rem", marginBottom: "0.5rem"}}/> */}
