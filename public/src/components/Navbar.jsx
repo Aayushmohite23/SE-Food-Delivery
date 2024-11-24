@@ -15,7 +15,7 @@ function Navbar()
     return (
         <Container>
             <div>
-                <h1>Tomato.</h1>
+                <h1>Food Ki Dukaan.</h1>
             </div>
             <div className='navlinks'>
                 <Link to='/'>Home</Link>
