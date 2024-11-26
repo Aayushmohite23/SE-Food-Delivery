@@ -1,4 +1,4 @@
-const host = "http://localhost:5000";
+const host = "https://se-food-delivery.onrender.com";
 
 export const getMenu = `${host}/api/restaurant/getMenu`;
 export const getCartItems = `${host}/api/restaurant/getCartItems`;
