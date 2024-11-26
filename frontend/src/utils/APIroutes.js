@@ -1,4 +1,4 @@
-const host = "https://se-food-delivery.onrender.com";
+const host = process.env.REACT_APP_API_URL;
 
 export const getMenu = `${host}/api/restaurant/getMenu`;
 export const getCartItems = `${host}/api/restaurant/getCartItems`;
