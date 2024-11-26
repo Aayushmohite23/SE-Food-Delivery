@@ -4,12 +4,14 @@ import cors from 'cors';
 import connectDB from './db/connect.js';
 import restaurantRoutes from './routes/restaurantRoutes.js';
 
+
+
 const app = express();
 
 app.use(cors());
 const port = process.env.PORT || 3000;
 
-const allowedOrigins = ['https://sefooddelivery.netlify.app/'];
+const allowedOrigins = ['https://se-food-delivery-jc6kt4quc-aayushs-projects-278abb3f.vercel.app/'];
 
 app.use(cors({
   origin: allowedOrigins,

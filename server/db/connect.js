@@ -1,10 +1,14 @@
 import mongoose from 'mongoose';
 
 const connectDB = () => {
-    const dbUri = process.env.NODE_ENV === 'test'
-    ? process.env.MONGO_URI_TEST  // Ensure this variable is in your .env.test file
-    : process.env.MONGO_URI;
-    return mongoose.connect(dbUri);
+    const dbUri =  process.env.MONGO_URI;
+    return mongoose.connect(dbUri)
+                .then(()=>{
+                    console.log("Connected to MongoDB!");
+                })
+                .catch(()=>{
+                    console.log("Connection failed");
+                });
 };
 
 export default connectDB;
