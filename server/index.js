@@ -8,10 +8,10 @@ import restaurantRoutes from './routes/restaurantRoutes.js';
 
 const app = express();
 
-app.use(cors());
+// app.use(cors());
 const port = process.env.PORT || 3000;
 
-const allowedOrigins = ['https://se-food-delivery-jc6kt4quc-aayushs-projects-278abb3f.vercel.app/'];
+const allowedOrigins = ['https://se-food-delivery.vercel.app/'];
 
 app.use(cors({
   origin: allowedOrigins,
@@ -24,7 +24,7 @@ app.use(express.json({limit: '50mb'}));
 // app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 
-app.use('https://se-food-delivery.onrender.com/api/restaurant', restaurantRoutes);
+app.use('api/restaurant', restaurantRoutes);
 
 const start = async () => {
     try
