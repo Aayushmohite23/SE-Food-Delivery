@@ -8,7 +8,7 @@ import restaurantRoutes from './routes/restaurantRoutes.js';
 
 const app = express();
 
-// app.use(cors());
+app.use(cors());
 const port = process.env.PORT || 3000;
 
 const allowedOrigins = ['https://se-food-delivery.vercel.app/'];
